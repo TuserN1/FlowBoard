@@ -3,7 +3,7 @@ fetch("https://flowboard-api-virid.vercel.app/cards")
 .then(Response=>Response.json())
 .then((data)=>{
      test=[...data]
-    //  console.log(test);
+     console.log(test);
      return test
      
     })
