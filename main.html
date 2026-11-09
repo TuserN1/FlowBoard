@@ -4,14 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <script src="./dynamics/data.js" defer></script>
-     <link rel="stylesheet" href="https://jsdelivr.net">
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="./dynamics/data.js"></script>
+    <script type="module" src="./dynamics/ui.js"></script>
+     <!-- <link rel="stylesheet" href="https://jsdelivr.net"> -->
       <link rel="stylesheet" href="./style/style.css">
-      <script src="https://jsdelivr.net" defer></script>
+
+      <!-- <script src="https://jsdelivr.net" defer></script> -->
 </head>
 <body>
     <header>
-        <div>
+        <div class="flex justify-start " >
             <img src="./assets/homeicone.png" alt="" > > 
             <span>projects</span> >
             <span>main project</span>
@@ -20,24 +23,26 @@
       
     </header>
     <main>
-        <section >
+        <section class="flex " >
             <span>Main Project</span>
             <span><img src="./assets/filtericone.png" alt="">Filter</span>
         </section>
-        <section>
-            <div id="todo">
+        <section class="h-dvh flex  gap-4 rounded-lg bg-white p-6 shadow-md outline outline-black/5 dark:bg-gray-800 justify-center">
+            <div id="todo" class="h-max bg-cyan-300 rounded-lg p-5">
                 <div><span>TO DO</span><span id="todototal"></span></div>
-                <button>+ Add New Task</button>
+                <button class="inset-shadow-indigo-500 rounded-full border-0 bg-red-50 px-4 py-2 text-sm font-semibold text-red-700 hover:bg-red-100 dark:bg-red-600 dark:text-red-100 dark:file:text-red-100 ">+ Add New Task</button>
+               
             </div>
-            <div id="inprogress">
+            <div id="inprogress" class="h-max bg-white rounded-lg p-5">
                 <div><span>In Progress</span>
                     <span id="progresstotal"></span></div>
-                <button>+ Add New Task</button>
+                 <button class="inset-shadow-indigo-500 rounded-full border-0 bg-violet-50 px-4 py-2 text-sm font-semibold text-violet-700 hover:bg-violet-100 dark:bg-green-600 dark:text-green-100 dark:file:text-violet-100 ">+ Add New Task</button>
+
             </div>
-            <div id="complated" >
-                <div><span>complated</span>
+            <div id="complated"  class="h-max bg-white rounded-lg p-5">
+                <div class="flex"><span>complated</span>
                     <span id="complatedtotal"></span></div>
-                <button>+ Add New Task</button>
+                <button class="inset-shadow-indigo-700 rounded-full border-0 bg-violet-50 px-4 py-2 text-sm font-semibold text-violet-700 hover:bg-violet-100 dark:bg-violet-600 dark:text-violet-100 dark:file:text-violet-100 ">+ Add New Task</button>
             </div>
         </section>
     </main>
