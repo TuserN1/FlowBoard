@@ -116,17 +116,27 @@ function search(input ) {
     const url = "https://flowboard-api-virid.vercel.app/cards?title_like=" + encodeURIComponent(input)
     fetch(url)
         .then((response) => response.json())
-        .then((data) =>  search_cards(data))
+        .then((data) =>  {
+            if(data.length!==0){
+
+                const section=document.querySelector('#search_display').parentElement
+                if(section.classList.contains("hidden")){
+                    section.classList.toggle("hidden")
+                search_cards(data)}
+
+                }section.classList.add("hidden")
+            console.log(data)
+        })
         .catch(error => {
+            
             console.error("Error fetching cards:", error);
         }
         );
        
 
 
-
 }
-
+const filter_btn=document.querySelector('')
 function fillter_cards() {
 
 

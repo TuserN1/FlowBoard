@@ -25,16 +25,26 @@
     </header>
     <main>
         <section class="flex justify-between items-center">
-
+            
             <label
-                class="flex items-center gap-3 max-w-md mx-auto px-4 py-2.5 bg-gray-50 border border-gray-300 rounded-lg cursor-text focus-within:bg-white focus-within:ring-2 focus-within:ring-blue-500 focus-within:border-blue-500 transition">
-                <span class="text-sm font-medium text-gray-500 select-none">Search</span>
-                <input type="search" id="searchbar" minlength="2" maxlength="50"
-                    class="w-full text-sm text-gray-900 bg-transparent focus:outline-none placeholder:text-gray-400"
-                    placeholder="Type here..." />
-            </label>
-            <span class="flex"><img src="./assets/filtericone.png" alt="">Filter</span>
-        </section>
+            class="flex items-center gap-3 max-w-md mx-auto px-4 py-2.5 bg-gray-50 border border-gray-300 rounded-lg cursor-text focus-within:bg-white focus-within:ring-2 focus-within:ring-blue-500 focus-within:border-blue-500 transition">
+            <span class="text-sm font-medium text-gray-500 select-none">Search</span>
+            <input type="search" id="searchbar" minlength="2" maxlength="50"
+            class="w-full text-sm text-gray-900 bg-transparent focus:outline-none placeholder:text-gray-400"
+            placeholder="Type here..." />
+        </label>
+        <span class="flex m-6 py-2 px-4 bg-sky-300 rounded-md">Filter</span>
+    </section>
+    <section 
+        class=" flex px-10 hidden inset-0 z-50 w-screen h-screen bg-gray-800 ">
+        <div id="search_display" class="w-full h-full bg-gray-700 flex flex-col pb-5 px-4   rounded-md">
+            
+                
+
+               
+
+        </div>
+    </section>
         <section id="errorsec" class="w-screen px-5 py-3 bg-gray-800 hidden">
             <div class="flex justify-end items-center px-4 bg-red-200 w-full h-20  rounded-md">
                 <button id="refreshbtn"
@@ -120,6 +130,7 @@
 
             </div>
         </section>
+        
     </main>
 
 </body>
