@@ -3,7 +3,7 @@
 export function card_creation(card, info) {
 
 
-
+card.textContent=""
     for (const key in info) {
         const cardinfo = info[key];
         const cardbody = document.createElement('div')

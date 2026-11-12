@@ -1,17 +1,22 @@
 import { card_creation } from './ui.js'
 import { task_wizard } from './ui.js'
-
+export let todo_data = []
+export let inpro_data = []
+export let done_data = []
 function loader_data() {
     Promise.all([
 
         fetch("https://flowboard-api-virid.vercel.app/cards?status=todo").then(response => response.json()),
         fetch("https://flowboard-api-virid.vercel.app/cards?status=in-progress").then(response => response.json()),
-        fetch("https://flowboard-api-virid.vercel.app/cards?status=todo").then(response => response.json())
+        fetch("https://flowboard-api-virid.vercel.app/cards?status=done").then(response => response.json())
     ])
         .then(([todoData, inProgressData, doneData]) => {
-            todo_show(todoData);
-            inprogress_show(inProgressData);
-            done_show(doneData);
+            todo_data=todoData
+            todo_show(todo_data);
+            inpro_data=inProgressData
+            inprogress_show(inpro_data);
+            done_data=donedata
+            done_show(doneDat);
             
         })
         .catch(error => {
@@ -35,6 +40,7 @@ function loader_data() {
 
         let place = document.querySelector('#done_holder')
         card_creation(place, data)
+        
     }
 }
 loader_data()
@@ -57,38 +63,42 @@ out_card_btn.addEventListener('click', () => {
     
 })
 
-const card_info={
-    
-    id: null,
-    title:null,
-    description: null ,
-    status: null ,
-    priority: null,
-    assignee: null,
-    dueDate: null,
-    tags: null ,
-    createdAt: "2026-11-09T11:09:20.433Z",
-    updatedAt: "2026-11-09T11:09:20.433Z"
-}
-const card_array=[]
 const task_form = document.querySelector('#add_task_form')
-       let id=12;
 task_form.addEventListener("submit", (event) => {
+    
     event.preventDefault();
+    const card_info={
+        
+        title:null,
+        description: null ,
+        status: null ,
+        priority: null,
+        assignee: null,
+        dueDate: null,
+        tags: null ,
+        createdAt: "2026-11-09T11:09:20.433Z",
+        updatedAt: "2026-11-09T11:09:20.433Z"
+    }
+
+
+
     const title=document.querySelector('#title_add').value;
     const description=document.querySelector('#description_add').value;
     const priority=document.querySelector('#priority_add').value;
     const assignee=document.querySelector('#assignee_add').value;
-    id++
     
-    card_info.id=id
    card_info.title=title
    card_info.description=description
    card_info.priority=priority
    card_info.assignee=assignee
-    card_array.push(card_info)
-    
-console.log(card_array)
+   todo_data.push(card_info)
+   console.log(todo_data);
+   let place_todo = document.querySelector('#todo_holder')
+   card_creation(place_todo,todo_data)
+   
+  
+
+     
     
     
 
@@ -108,6 +118,11 @@ function search(input){
             console.error("Error fetching cards:", error);
         }
     );
+
+
+}
+
+function fillter_cards(){
 
 
 }
