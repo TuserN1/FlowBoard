@@ -1,51 +1,113 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <script src="./dynamics/data.js"></script>
-    <script type="module" src="./dynamics/ui.js"></script>
-     <!-- <link rel="stylesheet" href="https://jsdelivr.net"> -->
-      <link rel="stylesheet" href="./style/style.css">
+    <script type="module" src="./dynamics/data.js"></script>
+    <!-- <link rel="stylesheet" href="https://jsdelivr.net"> -->
+    <link rel="stylesheet" href="./style/style.css">
 
-      <!-- <script src="https://jsdelivr.net" defer></script> -->
+
+    <!-- <script src="https://jsdelivr.net" defer></script> -->
 </head>
-<body>
-    <header>
-        <div class="flex justify-start " >
-            <img src="./assets/homeicone.png" alt="" > > 
-            <span>projects</span> >
-            <span>main project</span>
 
+<body>
+    <header class="w-full">
+        <div class="flex justify-between items-center py-6 px-8">
+            <span
+                class="text-2xl font-black tracking-wider uppercase bg-gradient-to-r from-indigo-600 to-violet-500 bg-clip-text text-transparent">FlowBoard</span>
+            <button id="addbtn" class="bg-purple-500 hover:bg-purple-700 py-2 px-3 rounded-sm text-purple-100 ">+ new
+                task</button>
         </div>
-      
+        
+
     </header>
     <main>
-        <section class="flex " >
-            <span>Main Project</span>
-            <span><img src="./assets/filtericone.png" alt="">Filter</span>
-        </section>
-        <section class="h-dvh flex  gap-4 rounded-lg bg-white p-6 shadow-md outline outline-black/5 dark:bg-gray-800 justify-center">
-            <div id="todo" class="h-max bg-cyan-300 rounded-lg p-5">
+        <section class="flex justify-between items-center">
+            
+            <label
+            class="flex items-center gap-3 max-w-md mx-auto px-4 py-2.5 bg-gray-50 border border-gray-300 rounded-lg cursor-text focus-within:bg-white focus-within:ring-2 focus-within:ring-blue-500 focus-within:border-blue-500 transition">
+            <span class="text-sm font-medium text-gray-500 select-none">Search</span>
+            <input type="search"
+            class="w-full text-sm text-gray-900 bg-transparent focus:outline-none placeholder:text-gray-400"
+            placeholder="Type here..." />
+        </label>
+        <span class="flex"><img src="./assets/filtericone.png" alt="">Filter</span>
+    </section>
+    <section id="errorsec" class="w-screen px-5 py-3 bg-gray-800 hidden">
+        <div class="flex justify-end items-center px-4 bg-red-200 w-full h-20  rounded-md">
+            <button id="refreshbtn" class="bg-red-400 hover:bg-red-700 py-2 px-3 rounded-sm text-purple-100 ">refresh</button>
+        </div>
+    </section>
+    <section
+    class="max-h-max min-h-screen w-full  grid grid-cols-[auto_auto_auto]  bg-white pt-6 flex-row shadow-md outline outline-black/5 dark:bg-gray-800 p-5 <div grid-cols-[repeat(auto-fit,minmax(max(250px,calc((100%-3rem)/3)),1fr))] justify-stretch  gap-6 ">
+            <div id="todo" class="min-w-[200px]  h-max bg-white rounded-sm p-5">
                 <div><span>TO DO</span><span id="todototal"></span></div>
-                <button class="inset-shadow-indigo-500 rounded-full border-0 bg-red-50 px-4 py-2 text-sm font-semibold text-red-700 hover:bg-red-100 dark:bg-red-600 dark:text-red-100 dark:file:text-red-100 ">+ Add New Task</button>
-               
+                <button
+                    class="inset-shadow-indigo-500 rounded-lg border-0 bg-red-50 px-4 py-2 mt-2 text-sm font-semibold text-red-700 hover:bg-red-100 dark:bg-red-600 dark:text-red-100 dark:file:text-red-100 ">+
+                    Add New Task</button>
+                <div id="todo_holder">
+
+
+                </div>
             </div>
-            <div id="inprogress" class="h-max bg-white rounded-lg p-5">
+            <div id="inprogress" class="min-w-[200px]  h-max bg-white rounded-sm p-5">
                 <div><span>In Progress</span>
-                    <span id="progresstotal"></span></div>
-                 <button class="inset-shadow-indigo-500 rounded-full border-0 bg-violet-50 px-4 py-2 text-sm font-semibold text-violet-700 hover:bg-violet-100 dark:bg-green-600 dark:text-green-100 dark:file:text-violet-100 ">+ Add New Task</button>
+                    <span id="progresstotal"></span>
+                </div>
+                <button
+                    class="inset-shadow-indigo-500 rounded-lg border-0 bg-violet-50 px-4 py-2 mt-2 text-sm font-semibold text-violet-700 hover:bg-violet-100 dark:bg-green-600 dark:text-green-100 dark:file:text-violet-100 ">+
+                    Add New Task</button>
+                <div id="inprogress_holder">
+
+
+                </div>
 
             </div>
-            <div id="complated"  class="h-max bg-white rounded-lg p-5">
+            <div id="complated" class="min-w-[200px]  h-max bg-white rounded-sm p-5">
                 <div class="flex"><span>complated</span>
-                    <span id="complatedtotal"></span></div>
-                <button class="inset-shadow-indigo-700 rounded-full border-0 bg-violet-50 px-4 py-2 text-sm font-semibold text-violet-700 hover:bg-violet-100 dark:bg-violet-600 dark:text-violet-100 dark:file:text-violet-100 ">+ Add New Task</button>
+                    <span id="complatedtotal"></span>
+                </div>
+                <button
+                    class="inset-shadow-indigo-700 rounded-lg border-0 bg-violet-50 px-4 py-2 mt-2 text-sm font-semibold text-violet-700 hover:bg-violet-100 dark:bg-violet-600 dark:text-violet-100 dark:file:text-violet-100 ">+
+                    Add New Task</button>
+                <div id="done_holder">
+
+
+                </div>
+            </div>
+        </section>
+        <section id="wizard" class="fixed hidden flex px-10 py-20 justify-center items-center inset-0 z-50 w-screen h-screen backdrop-blur-sm">
+            <div class="w-full h-full bg-sky-700 flex flex-col pb-5 px-4 rounded-md">
+                <div class="flex justify-end "><button  id="out"class="m-4 bg-red-500 hover:bg-red-700 py-2 px-3 rounded-sm text-purple-100 ">X</button></div>
+                <form action="" class="h-full rounded-md flex flex-col items-center justify-stritsh pt-auto bg-blue-700">
+                    <label class="bg-red-300 " ><input type="text" name="" id=""></label>
+                    <label ><textarea class="" name="" id=""></textarea></label>
+                    <label >
+                        <select name="" id="">
+                            <option value="high">high</option>
+                            <option value="medium">medium</option>
+                            <option value="low">low</option>
+                        </select>
+                    </label>
+                     <label >
+                        <select name="" id="">
+                            <option value="Inès Moreau">Inès Moreau</option>
+                            <option value="Lucas Martin">Lucas Martin</option>
+                            <option value=""></option>
+                        </select>
+                    </label>
+
+                    
+                    <button type="submit" class="mt-auto mb-6 bg-gray-600 w-30 hover:bg-purple-700 py-2 px-3 rounded-sm text-gray-100 ">save</button>
+                </form>
             </div>
         </section>
     </main>
-    
+
 </body>
+
 </html>
