@@ -88,7 +88,6 @@ task_form.addEventListener("submit", (event) => {
    card_info.assignee=assignee
     card_array.push(card_info)
     
-console.log(card_array)
     
     
 
