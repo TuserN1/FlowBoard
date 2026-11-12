@@ -29,7 +29,7 @@
             <label
                 class="flex items-center gap-3 max-w-md mx-auto px-4 py-2.5 bg-gray-50 border border-gray-300 rounded-lg cursor-text focus-within:bg-white focus-within:ring-2 focus-within:ring-blue-500 focus-within:border-blue-500 transition">
                 <span class="text-sm font-medium text-gray-500 select-none">Search</span>
-                <input type="search" id="searchbar"
+                <input type="search" id="searchbar" minlength="2" maxlength="50"
                     class="w-full text-sm text-gray-900 bg-transparent focus:outline-none placeholder:text-gray-400"
                     placeholder="Type here..." />
             </label>
@@ -74,7 +74,7 @@
             </div>
         </section>
         <section id="wizard"
-            class="fixed  flex px-10 py-20 justify-center items-center inset-0 z-50 w-screen h-screen backdrop-blur-sm">
+            class="fixed hidden flex px-10 py-20 justify-center items-center inset-0 z-50 w-screen h-screen backdrop-blur-sm">
             <div class="w-full h-full bg-sky-200 flex flex-col pb-5 px-4 rounded-md">
                 <div class="flex justify-end "><button id="out"
                         class="m-4 bg-red-500 hover:bg-red-700 py-2 px-3 rounded-sm text-purple-100 ">X</button></div>

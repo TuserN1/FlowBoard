@@ -1,8 +1,8 @@
 import { card_creation } from './ui.js'
-import { task_wizard } from './ui.js'
-export let todo_data = []
-export let inpro_data = []
-export let done_data = []
+import { search_cards } from './ui.js'
+let todo_data = []
+let inpro_data = []
+let done_data = []
 function loader_data() {
     Promise.all([
 
@@ -11,13 +11,13 @@ function loader_data() {
         fetch("https://flowboard-api-virid.vercel.app/cards?status=done").then(response => response.json())
     ])
         .then(([todoData, inProgressData, doneData]) => {
-            todo_data=todoData
+            todo_data = todoData
             todo_show(todo_data);
-            inpro_data=inProgressData
+            inpro_data = inProgressData
             inprogress_show(inpro_data);
-            done_data=donedata
-            done_show(doneDat);
-            
+            done_data = doneData
+            done_show(done_data);
+
         })
         .catch(error => {
             console.error("Error fetching cards:", error);
@@ -40,7 +40,7 @@ function loader_data() {
 
         let place = document.querySelector('#done_holder')
         card_creation(place, data)
-        
+
     }
 }
 loader_data()
@@ -55,74 +55,79 @@ const out_card_btn = document.querySelector('#out')
 add_card_btn.addEventListener('click', () => {
     const form = document.querySelector('#wizard')
     form.classList.toggle("hidden")
-    
+
 })
 out_card_btn.addEventListener('click', () => {
     const form = document.querySelector('#wizard')
     form.classList.toggle("hidden")
-    
+
 })
 
 const task_form = document.querySelector('#add_task_form')
 task_form.addEventListener("submit", (event) => {
-    
+
     event.preventDefault();
-    const card_info={
-        
-        title:null,
-        description: null ,
-        status: null ,
+    const card_info = {
+
+        title: null,
+        description: null,
+        status: null,
         priority: null,
         assignee: null,
         dueDate: null,
-        tags: null ,
+        tags: null,
         createdAt: "2026-11-09T11:09:20.433Z",
         updatedAt: "2026-11-09T11:09:20.433Z"
     }
 
 
 
-    const title=document.querySelector('#title_add').value;
-    const description=document.querySelector('#description_add').value;
-    const priority=document.querySelector('#priority_add').value;
-    const assignee=document.querySelector('#assignee_add').value;
-    
-   card_info.title=title
-   card_info.description=description
-   card_info.priority=priority
-   card_info.assignee=assignee
-   todo_data.push(card_info)
-   console.log(todo_data);
-   let place_todo = document.querySelector('#todo_holder')
-   card_creation(place_todo,todo_data)
-   
-  
+    const title = document.querySelector('#title_add').value;
+    const description = document.querySelector('#description_add').value;
+    const priority = document.querySelector('#priority_add').value;
+    const assignee = document.querySelector('#assignee_add').value;
 
-     
-    
-    
+    card_info.title = title
+    card_info.description = description
+    card_info.priority = priority
+    card_info.assignee = assignee
+    todo_data.push(card_info)
+    console.log(todo_data);
+    let place_todo = document.querySelector('#todo_holder')
+    card_creation(place_todo, todo_data)
 
-})
-const user_search=document.querySelector('#searchbar')
-user_search.addEventListener('input',(event)=>{
-search(event.target.value)
+
+
+
+
+
 
 })
-function search(input){
+const user_search = document.querySelector('#searchbar')
+user_search.addEventListener('input', (event) => {
+    const search_input=event.target.value
+    console.log(search_input);
+    
+    search(search_input)
 
-    const url="https://flowboard-api-virid.vercel.app/cards?title[startsWith]="+input
+})
+function search(input ) {
+
+    const url = "https://flowboard-api-virid.vercel.app/cards?title_like=" + encodeURIComponent(input)
     fetch(url)
-    .then((response)=>response.json())
-    .then((data)=>console.log(data))
-    .catch(error => {
+        .then((response) => response.json())
+        .then((data) =>  search_cards(data))
+        .catch(error => {
             console.error("Error fetching cards:", error);
         }
-    );
+        );
+       
+
 
 
 }
 
-function fillter_cards(){
+function fillter_cards() {
 
 
 }

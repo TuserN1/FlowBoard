@@ -48,8 +48,9 @@ card.textContent=""
 
 }
 
-export function task_wizard(exemple){
-    const modale_holder=document.querySelector('#wizard')
+export function search_cards(data){
+    console.log(data)
+    
     
 
 }
