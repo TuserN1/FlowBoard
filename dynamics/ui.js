@@ -8,7 +8,6 @@ export function card_creation(card, info) {
         const cardinfo = info[key];
         const cardbody = document.createElement('div')
         cardbody.classList.add("bg-blue-300", "h-24", "rounded-sm", "my-4","flex-col","flex","justify-start","h-max")
-        console.log(card)
         const card_lable=document.createElement('span')
         if(info[key].priority=="high"){
             card_lable.textContent=info[key].priority
@@ -24,8 +23,11 @@ export function card_creation(card, info) {
         }
         
         const card_title=document.createElement('h4')
+        const card_discription=document.createElement('p')
         card_title.textContent=info[key].title
+        card_discription.textContent=info[key].description
         card_title.classList.add("mx-4")
+        card_discription.classList.add('m-3')
         
         
         
@@ -34,7 +36,7 @@ export function card_creation(card, info) {
         
         card.append(cardbody)
         // cardbody.append()
-        cardbody.append(card_lable ,card_title)
+        cardbody.append(card_lable ,card_title ,card_discription)
 
 
 

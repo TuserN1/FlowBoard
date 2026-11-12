@@ -5,7 +5,7 @@ function loader_data() {
 
         fetch("https://flowboard-api-virid.vercel.app/cards?status=todo").then(response => response.json()),
         fetch("https://flowboard-api-virid.vercel.app/cards?status=in-progress").then(response => response.json()),
-        fetch("https://flowboard-api-virid.vercel.app/cards?status=done").then(response => response.json())
+        fetch("https://flowboard-api-virid.vercel.app/cards?status=todo").then(response => response.json())
     ])
         .then(([todoData, inProgressData, doneData]) => {
             todo_show(todoData);
@@ -54,6 +54,18 @@ add_card_btn.addEventListener('click', () => {
 out_card_btn.addEventListener('click', () => {
     const form = document.querySelector('#wizard')
     form.classList.toggle("hidden")
+
+})
+let a=""
+const task_form = document.querySelector('#add_task_form')
+task_form.addEventListener("submit", (event) => {
+    event.preventDefault();
+    const test=event.target
+const testing=test.children
+console.log(toType(testing));
+
+    
+    
 
 })
 
