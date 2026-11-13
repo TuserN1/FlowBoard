@@ -33,7 +33,7 @@
             class="w-full text-sm text-gray-900 bg-transparent focus:outline-none placeholder:text-gray-400"
             placeholder="Type here..." />
         </label>
-        <span class="flex m-6 py-2 px-4 bg-sky-300 rounded-md">Filter</span>
+        <button class="flex m-6 py-2 px-4 bg-sky-300 rounded-md">Filter</button>
     </section>
     <section 
         class=" flex px-10 hidden inset-0 z-50 w-screen h-screen bg-gray-800 ">
@@ -63,7 +63,7 @@
         </section>
         <section
             class="max-h-max min-h-screen w-full  grid grid-cols-[auto_auto_auto]  bg-white pt-6 flex-row shadow-md outline outline-black/5 dark:bg-gray-800 p-5 <div grid-cols-[repeat(auto-fit,minmax(max(250px,calc((100%-3rem)/3)),1fr))] justify-stretch  gap-6 ">
-            <div id="todo" class="min-w-[200px]  h-max bg-white rounded-sm p-5">
+            <div id="todo" class="min-w-[200px]  h-max bg-gray-700 rounded-sm p-5">
                 <div id="col1"><span>TO DO</span><span id="todototal"></span></div>
 
                 <div id="todo_holder">
@@ -71,7 +71,7 @@
 
                 </div>
             </div>
-            <div id="inprogress" class="min-w-[200px]  h-max bg-white rounded-sm p-5">
+            <div id="inprogress" class="min-w-[200px]  h-max bg-gray-700 rounded-sm p-5">
                 <div id="col2"><span>In Progress</span>
                     <span id="progresstotal"></span>
                 </div>
@@ -82,7 +82,7 @@
                 </div>
 
             </div>
-            <div id="col3" class="min-w-[200px]  h-max bg-white rounded-sm p-5">
+            <div id="col3" class="min-w-[200px]  h-max bg-gray-700 rounded-sm p-5">
                 <div class="flex"><span>complated</span>
                     <span id="complatedtotal"></span>
                 </div>
