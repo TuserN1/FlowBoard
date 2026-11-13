@@ -16,8 +16,8 @@
     <header class="w-full">
         <div class="flex justify-between items-center py-6 px-8">
             <span
-                class="text-2xl font-black tracking-wider uppercase bg-gradient-to-r from-indigo-600 to-violet-500 bg-clip-text text-transparent">FlowBoard</span>
-            <button id="addbtn" class="bg-purple-500 hover:bg-purple-700 py-2 px-3 rounded-sm text-purple-100 ">+ new
+                class="text-2xl font-black tracking-wider uppercase bg-gradient-to-r from-indigo-400 to-violet-500 bg-clip-text text-transparent">FlowBoard</span>
+            <button id="addbtn" class="bg-purple-400 hover:bg-purple-500 py-2 px-3 rounded-sm text-purple-100 ">+ new
                 task</button>
         </div>
 
@@ -33,11 +33,12 @@
             class="w-full text-sm text-gray-900 bg-transparent focus:outline-none placeholder:text-gray-400"
             placeholder="Type here..." />
         </label>
-        <button class="flex m-6 py-2 px-4 bg-sky-300 rounded-md">Filter</button>
+        <button id="filter_btn" class="flex m-6 py-2 px-4 bg-sky-200 rounded-md">Filter</button>
     </section>
     <section 
         class=" flex px-10 hidden inset-0 z-50 w-screen h-screen bg-gray-800 ">
         <div id="search_display" class="w-full h-full bg-gray-700 flex flex-col pb-5 px-4   rounded-md">
+            
             
                 
 
@@ -46,10 +47,36 @@
         </div>
     </section>
     <section 
-        class=" flex px-10 hidden inset-0 z-50 w-screen h-screen bg-gray-800 ">
-        <div id="Filter_display" class="w-full h-full bg-gray-700 flex flex-col pb-5 px-4   rounded-md">
+        class=" flex px-10  inset-0 z-50 w-screen h-screen bg-gray-800 ">
+        <div id="Filter_display" class="w-full h-full bg-gray-700 flex flex-col pb-5 px-4 rounded-md">
             
-                
+                <form action="" class="pt-4" >
+                 <label class="flex flex-col gap-1 text-sm text-white">
+                            Priority
+                            <select id="priority_add" class="w-full rounded border border-gray-300 px-3 py-2">
+                                <option value="high">High</option>
+                                <option value="medium" selected>Medium</option>
+                                <option value="low">Low</option>
+                            </select>
+                        </label>
+
+                        <label class="flex flex-col gap-1 text-sm text-white">
+                            Assignee
+                            <select id="assignee_add" class="w-full rounded border border-gray-300 px-3 py-2">
+                                <option value="Thomas Leroy">Thomas Leroy</option>
+                                <option value="Inès Moreau">Inès Moreau</option>
+                                <option value="Lucas Martin">Lucas Martin</option>
+                                <option value="Amina Haddad">Amina Haddad</option>
+                                <option value="Yasmine Benali">Yasmine Benali</option>
+                                <option value="Amina Haddad">Amina Haddad</option>
+
+                            </select>
+                        </label>
+            </form>
+            <div id="filter_result">
+
+
+            </div>
 
                
 
