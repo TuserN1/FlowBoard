@@ -1,26 +1,21 @@
 import { card_creation } from './ui.js'
 import { search_cards } from './ui.js'
+import axios from 'axios'
 let todo_data = []
 let inpro_data = []
 let done_data = []
-function loader_data() {
-    Promise.all([
 
-        fetch("https://flowboard-api-virid.vercel.app/cards?status=todo").then(response => response.json()),
-        fetch("https://flowboard-api-virid.vercel.app/cards?status=in-progress").then(response => response.json()),
-        fetch("https://flowboard-api-virid.vercel.app/cards?status=done").then(response => response.json())
+axios.get
+async function loader_data() {
+    const [todoData, inProgressData, doneData] = await Promise.all([
+
+        axios.get("https://flowboard-api-virid.vercel.app/cards?status=todo"),
+        axios.get("https://flowboard-api-virid.vercel.app/cards?status=in-progress"),
+        axios.get("https://flowboard-api-virid.vercel.app/cards?status=done")
     ])
-        .then(([todoData, inProgressData, doneData]) => {
-            todo_data = todoData
-            todo_show(todo_data);
-            inpro_data = inProgressData
-            inprogress_show(inpro_data);
-            done_data = doneData
-            done_show(done_data);
-
-        })
-        .catch(error => {
-            console.error("Error fetching cards:", error);
+       
+        .catch(error => {  
+            console.error("Error. fetching cards:", error);
             document.querySelector('#errorsec').classList.toggle('hidden')
         });
 
