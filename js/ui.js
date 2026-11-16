@@ -2,7 +2,7 @@
 
 export function card_creation(card, info,count_place) {
 
-
+ 
 card.textContent=""
     for (const key in info) {
         const cardinfo = info[key];

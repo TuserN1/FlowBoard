@@ -1,43 +1,11 @@
 import { card_creation } from './ui.js'
-import { search_cards } from './ui.js'
+import * ui from './ui.js'
 import axios from 'axios'
 let todo_data = []
 let inpro_data = []
 let done_data = []
 
-axios.get
-async function loader_data() {
-    const [todoData, inProgressData, doneData] = await Promise.all([
 
-        axios.get("https://flowboard-api-virid.vercel.app/cards?status=todo"),
-        axios.get("https://flowboard-api-virid.vercel.app/cards?status=in-progress"),
-        axios.get("https://flowboard-api-virid.vercel.app/cards?status=done")
-    ])
-       
-        .catch(error => {  
-            console.error("Error. fetching cards:", error);
-            document.querySelector('#errorsec').classList.toggle('hidden')
-        });
-
-    function todo_show(data) {
-
-        let place = document.querySelector('#todo_holder')
-        card_creation(place, data,document.querySelector('#todototal'))
-
-    }
-    function inprogress_show(data) {
-        let place = document.querySelector('#inprogress_holder')
-        card_creation(place, data,document.querySelector('#progresstotal'))
-
-    }
-    function done_show(data) {
-
-
-        let place = document.querySelector('#done_holder')
-        card_creation(place, data,document.querySelector('#complatedtotal'))
-
-    }
-}
 loader_data()
 
 document.querySelector('#refreshbtn').addEventListener('click', () => {
@@ -120,7 +88,7 @@ function search(input ) {
                 const section=document.querySelector('#search_display').parentElement
                  if (data.length !== 0) {
                 section.classList.remove("hidden")
-                search_cards(data)      
+                ui.search_cards(data)      
             } else {
                 section.classList.add("hidden")
             }
