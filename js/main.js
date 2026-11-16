@@ -14,8 +14,8 @@ async function loader_data() {
         axios.get("https://flowboard-api-virid.vercel.app/cards?status=done")
     ])
        
-        .catch(error => {
-            console.error("Error fetching cards:", error);
+        .catch(error => {  
+            console.error("Error. fetching cards:", error);
             document.querySelector('#errorsec').classList.toggle('hidden')
         });
 
