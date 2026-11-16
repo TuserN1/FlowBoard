@@ -27,19 +27,19 @@ function loader_data() {
     function todo_show(data) {
 
         let place = document.querySelector('#todo_holder')
-        card_creation(place, data)
+        card_creation(place, data,document.querySelector('#todototal'))
 
     }
     function inprogress_show(data) {
         let place = document.querySelector('#inprogress_holder')
-        card_creation(place, data)
+        card_creation(place, data,document.querySelector('#progresstotal'))
 
     }
     function done_show(data) {
 
 
         let place = document.querySelector('#done_holder')
-        card_creation(place, data)
+        card_creation(place, data,document.querySelector('#complatedtotal'))
 
     }
 }

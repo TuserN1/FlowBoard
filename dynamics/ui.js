@@ -1,6 +1,6 @@
 
 
-export function card_creation(card, info) {
+export function card_creation(card, info,count_place) {
 
 
 card.textContent=""
@@ -37,6 +37,11 @@ card.textContent=""
         card.append(cardbody)
         // cardbody.append()
         cardbody.append(card_lable ,card_title ,card_discription)
+
+        
+        if (count_place) {
+        count_place.textContent = info.length
+    }
 
 
 
