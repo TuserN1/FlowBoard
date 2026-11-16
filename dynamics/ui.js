@@ -52,10 +52,7 @@ export function search_cards(data){
     const search_holder=document.querySelector('#search_display')
     search_holder.textContent=""
     card_creation(search_holder,data)
-    data.forEach(element => {
-        
-        
-    });        
+            
     
 
 }

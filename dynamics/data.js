@@ -106,12 +106,15 @@ task_form.addEventListener("submit", (event) => {
 const user_search = document.querySelector('#searchbar')
 user_search.addEventListener('input', (event) => {
     const search_input=event.target.value
-    console.log(search_input);
     
     search(search_input)
 
 })
 function search(input ) {
+    if (input.trim() === "") {
+        section.classList.add("hidden")
+        return
+    }
 
     const url = "https://flowboard-api-virid.vercel.app/cards?title_like=" + encodeURIComponent(input)
     fetch(url)
@@ -120,12 +123,13 @@ function search(input ) {
             if(data.length!==0){
 
                 const section=document.querySelector('#search_display').parentElement
-                if(section.classList.contains("hidden")){
-                    section.classList.toggle("hidden")
-                search_cards(data)}
-
-                }section.classList.add("hidden")
-            console.log(data)
+                 if (data.length !== 0) {
+                section.classList.remove("hidden")
+                search_cards(data)      
+            } else {
+                section.classList.add("hidden")
+            }
+        }
         })
         .catch(error => {
             
@@ -136,10 +140,37 @@ function search(input ) {
 
 
 }
-const filter_btn=document.querySelector('Filter_display')
+
+
+const priority_filter = document.querySelector('#priority_filter')
+const assignee_filter = document.querySelector('#assignee_filter')
+
 function fillter_cards() {
-    
+    const priority = priority_filter.value
+    const assignee = assignee_filter.value
 
+    let filter = ""
+    if (priority !== "") {
+        filter += "&priority=" + priority
+    }
+    if (assignee !== "") {
+        filter += "&assignee=" + assignee
+    }
 
+    Promise.all([
+        fetch("https://flowboard-api-virid.vercel.app/cards?status=todo" + filter).then(response => response.json()),
+        fetch("https://flowboard-api-virid.vercel.app/cards?status=in-progress" + filter).then(response => response.json()),
+        fetch("https://flowboard-api-virid.vercel.app/cards?status=done" + filter).then(response => response.json())
+    ])
+        .then(([todoData, inProgressData, doneData]) => {
+            card_creation(document.querySelector('#todo_holder'), todoData)
+            card_creation(document.querySelector('#inprogress_holder'), inProgressData)
+            card_creation(document.querySelector('#done_holder'), doneData)
+        })
+        .catch(error => {
+            console.error("Error filtering cards:", error)
+        })
 }
 
+priority_filter.addEventListener('change', fillter_cards)
+assignee_filter.addEventListener('change', fillter_cards)
