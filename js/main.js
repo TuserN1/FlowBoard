@@ -9,9 +9,9 @@ axios.get
 async function loader_data() {
     const [todoData, inProgressData, doneData] = await Promise.all([
 
-        axios.("https://flowboard-api-virid.vercel.app/cards?status=todo"),
-        axios.("https://flowboard-api-virid.vercel.app/cards?status=in-progress"),
-        axios.("https://flowboard-api-virid.vercel.app/cards?status=done")
+        axios.get("https://flowboard-api-virid.vercel.app/cards?status=todo"),
+        axios.get("https://flowboard-api-virid.vercel.app/cards?status=in-progress"),
+        axios.get("https://flowboard-api-virid.vercel.app/cards?status=done")
     ])
        
         .catch(error => {
