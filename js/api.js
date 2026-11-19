@@ -1,0 +1,138 @@
+import axios from "axios";
+import { card_creation } from "./ui.js";
+export async function tasks_data() {
+
+    try {
+
+        const data = await axios.get("https://flowboard-api-virid.vercel.app/cards/");
+
+        return card_creation(await data.data)
+
+    } catch (error) {
+        console.error("Error. fetching cards:", error);
+        document.querySelector('#errorsec').classList.toggle('hidden')
+
+    };
+
+}
+
+
+export async function data_filtering_api(filter) {
+    try {
+        const [filtered_data] = await Promise.all([
+            axios.get("https://flowboard-api-virid.vercel.app/cards?" + filter),
+        ])
+        return card_creation(filtered_data.data)
+
+
+    } catch (error) {
+        console.error("Error filtering cards:", error.name)
+        console.error(error.message)
+    }
+}
+
+export async function data_modifiying_api(task ,id) {
+    try {
+
+      await axios.put("https://flowboard-api-virid.vercel.app/cards/"+ id +"?password=1234",  task)
+      
+        tasks_data()
+    } catch (error) {
+        console.error("Error filtering cards:", error.name)
+        console.error(error.message)
+    }
+}
+
+
+
+export async function data_adder_api(task){
+    try {
+
+        await axios.post("https://flowboard-api-virid.vercel.app/cards/?password=1234",  task)
+      
+        tasks_data()
+    } catch (error) {
+        console.error("Error filtering cards:", error.name)
+        console.error(error.message)
+    }
+
+
+
+}
+export async function get_one_task() {
+
+    try {
+
+        const data = await axios.get("https://flowboard-api-virid.vercel.app/cards/");
+
+        return card_creation(data.data)
+
+    } catch (error) {
+        console.error("Error. fetching cards:", error);
+        document.querySelector('#errorsec').classList.toggle('hidden')
+
+    };
+}
+
+
+export async function data_delete_api(id){
+    try {
+       await axios.delete('https://flowboard-api-virid.vercel.app/cards/'+id+'?password=1234')
+        await tasks_data()
+        
+    } catch (error) {
+         console.error("Error. fetching cards:", error);
+        document.querySelector('#errorsec').classList.toggle('hidden')
+        
+    }
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+document.querySelector('#reset').addEventListener('click',()=>{
+
+
+    fetch('https://flowboard-api-virid.vercel.app/reset?password=1234', {
+  method: 'POST',
+  headers: {
+    'X-Workspace': 'public'
+  }
+})
+tasks_data()
+})
+
+
+
+    
+
+
+
+
+    
