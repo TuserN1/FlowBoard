@@ -1,6 +1,7 @@
 
 import axios from "axios";
 import  * as data_collecter from "./api.js"
+import * as main from "./main.js"
 export function card_creation(card) {
 
 
@@ -39,36 +40,42 @@ export function card_creation(card) {
         card_discription.classList.add('m-3','flex')
         //modif button add
         const card_modif_btn=document.createElement('button')
+        const card_delete_btn=document.createElement('button')
         card_modif_btn.textContent="modifier"
+        card_delete_btn.textContent="delete"
         card_modif_btn.dataset.id=cardinfo.id
-        card_modif_btn.classList.add('m-4', 'bg-gray-700', 'hover:bg-gray-900', 'py-2', 'px-3', 'rounded-sm', 'text-purple-100' )
-        
+        card_delete_btn.dataset.id=cardinfo.id
+        card_modif_btn.classList.add('modif','m-4', 'bg-gray-700', 'hover:bg-gray-900', 'py-2', 'px-3', 'rounded-sm', 'text-purple-100' )
+        card_delete_btn.classList.add('delete','m-4', 'bg-orange-800', 'hover:bg-orange-900', 'py-2', 'px-3', 'rounded-sm', 'text-purple-100' )
         
         
         
         const todo_holder=document.querySelector('#todo_holder')
         const inprogress_holder=document.querySelector('#inprogress_holder')
         const done_holder=document.querySelector('#done_holder')
-       
+        
         if (cardinfo.status=="todo"){
             
-        todo_holder.append(cardbody)
-        cardbody.append(card_lable ,card_title ,card_discription)
-        
-
+            todo_holder.append(cardbody)
+            cardbody.append(card_lable ,card_title ,card_discription)
+            
+            
         }else if (cardinfo.status=="in-progress"){
-           
-
-             inprogress_holder.append(cardbody)
-        cardbody.append(card_lable ,card_title ,card_discription)
-
+            
+            
+            inprogress_holder.append(cardbody)
+            cardbody.append(card_lable ,card_title ,card_discription)
+            
         }else if(cardinfo.status=="done"){
-         
-             done_holder.append(cardbody)
-        cardbody.append(card_lable ,card_title ,card_discription)
+            
+            done_holder.append(cardbody)
+            cardbody.append(card_lable ,card_title ,card_discription)
         }
-        card_discription.append(card_modif_btn)
-
+        card_discription.append(card_modif_btn,card_delete_btn)
+        
+        card_delete_btn.addEventListener('click',(event)=>{
+            main.delete_data(event)
+        })
 
 
         
@@ -84,6 +91,7 @@ export function card_creation(card) {
 
 
     }
+    
 
 
 }
@@ -197,7 +205,7 @@ data_collecter.data_filtering_api(filter)
 export function modif_from_wizard(e){
     const task_modif={};
     console.log(e);
-    
+
     
     document.querySelector('#wizard').classList.toggle('hidden')
     document.querySelector("#title_add").value=e
