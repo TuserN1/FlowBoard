@@ -1,54 +1,171 @@
+import { card_creation } from './ui.js'
+import { search_cards } from './ui.js'
+import axios from 'axios'
+let todo_data = []
+let inpro_data = []
+let done_data = []
 
-import * as painter from './ui.js'
-import * as data_collecter from './api.js'
+axios.get
+async function loader_data() {
+    const [todoData, inProgressData, doneData] = await Promise.all([
+
+        axios.get("https://flowboard-api-virid.vercel.app/cards?status=todo"),
+        axios.get("https://flowboard-api-virid.vercel.app/cards?status=in-progress"),
+        axios.get("https://flowboard-api-virid.vercel.app/cards?status=done")
+    ])
+       
+        .catch(error => {  
+            console.error("Error. fetching cards:", error);
+            document.querySelector('#errorsec').classList.toggle('hidden')
+        });
+
+    function todo_show(data) {
+
+        let place = document.querySelector('#todo_holder')
+        card_creation(place, data,document.querySelector('#todototal'))
+
+    }
+    function inprogress_show(data) {
+        let place = document.querySelector('#inprogress_holder')
+        card_creation(place, data,document.querySelector('#progresstotal'))
+
+    }
+    function done_show(data) {
 
 
+        let place = document.querySelector('#done_holder')
+        card_creation(place, data,document.querySelector('#complatedtotal'))
 
-await data_collecter.tasks_data()
+    }
+}
+loader_data()
 
-priority_filter.addEventListener('change', painter.fillter_cards)
-assignee_filter.addEventListener('change', painter.fillter_cards)
-const card_modif_btns = document.querySelectorAll('.cardbody .modif')
+document.querySelector('#refreshbtn').addEventListener('click', () => {
+    document.querySelector('#errorsec').classList.toggle('hidden')
 
-card_modif_btns.forEach((element) => {
+    loader_data()
+})
+const add_card_btn = document.querySelector('#addbtn')
+const out_card_btn = document.querySelector('#out')
+add_card_btn.addEventListener('click', () => {
+    const form = document.querySelector('#wizard')
+    form.classList.toggle("hidden")
 
-    element.addEventListener('click', (e) => {
+})
+out_card_btn.addEventListener('click', () => {
+    const form = document.querySelector('#wizard')
+    form.classList.toggle("hidden")
 
-        painter.modif_from_wizard(e.target.dataset.id)
-    })
 })
 
+const task_form = document.querySelector('#add_task_form')
+task_form.addEventListener("submit", (event) => {
 
+    event.preventDefault();
+    const card_info = {
 
-
-
-const add_modif_form = document.querySelector('#add_modif_form')
-add_modif_form.addEventListener('submit', (e) => {
-    e.preventDefault()
-    if (e.submitter.value == modif) {
-        console.log(e.submitter.value);
-
-
-
-        //const  data_collecter.data_modifiying_api(painter.modif_from_wizard(e))
-
-    } else {
-
+        title: null,
+        description: null,
+        status: null,
+        priority: null,
+        assignee: null,
+        dueDate: null,
+        tags: null,
+        createdAt: "2026-11-09T11:09:20.433Z",
+        updatedAt: "2026-11-09T11:09:20.433Z"
     }
 
 
 
+    const title = document.querySelector('#title_add').value;
+    const description = document.querySelector('#description_add').value;
+    const priority = document.querySelector('#priority_add').value;
+    const assignee = document.querySelector('#assignee_add').value;
+
+    card_info.title = title
+    card_info.description = description
+    card_info.priority = priority
+    card_info.assignee = assignee
+    todo_data.push(card_info)
+    console.log(todo_data);
+    let place_todo = document.querySelector('#todo_holder')
+    card_creation(place_todo, todo_data)
+
+
+
+
+
+
+
 })
+const user_search = document.querySelector('#searchbar')
+user_search.addEventListener('input', (event) => {
+    const search_input=event.target.value
+    
+    search(search_input)
+
+})
+function search(input ) {
+    if (input.trim() === "") {
+        section.classList.add("hidden")
+        return
+    }
+
+    const url = "https://flowboard-api-virid.vercel.app/cards?title_like=" + encodeURIComponent(input)
+    fetch(url)
+        .then((response) => response.json())
+        .then((data) =>  {
+            if(data.length!==0){
+
+                const section=document.querySelector('#search_display').parentElement
+                 if (data.length !== 0) {
+                section.classList.remove("hidden")
+                search_cards(data)      
+            } else {
+                section.classList.add("hidden")
+            }
+        }
+        })
+        .catch(error => {
+            
+            console.error("Error fetching cards:", error);
+        }
+        );
+       
 
 
-
-
-export function delete_data(element){
-
-      const id = element.target.dataset.id
-            data_collecter.data_delete_api(id)
 }
 
 
+const priority_filter = document.querySelector('#priority_filter')
+const assignee_filter = document.querySelector('#assignee_filter')
 
+function fillter_cards() {
+    const priority = priority_filter.value
+    const assignee = assignee_filter.value
 
+    let filter = ""
+    if (priority !== "") {
+        filter += "&priority=" + priority
+    }
+    if (assignee !== "") {
+        filter += "&assignee=" + assignee
+    }
+
+    Promise.all([
+        fetch("https://flowboard-api-virid.vercel.app/cards?status=todo" + filter).then(response => response.json()),
+        fetch("https://flowboard-api-virid.vercel.app/cards?status=in-progress" + filter).then(response => response.json()),
+        fetch("https://flowboard-api-virid.vercel.app/cards?status=done" + filter).then(response => response.json())
+    ])
+        .then(([todoData, inProgressData, doneData]) => {
+            card_creation(document.querySelector('#todo_holder'), todoData)
+            card_creation(document.querySelector('#inprogress_holder'), inProgressData)
+            card_creation(document.querySelector('#done_holder'), doneData)
+        })
+        .catch(error => {
+            console.error("Error filtering cards:", error)
+        })
+}
+
+priority_filter.addEventListener('change', fillter_cards)
+assignee_filter.addEventListener('change', fillter_cards)
