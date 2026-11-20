@@ -1,18 +1,10 @@
 import axios from "axios";
 import { card_creation } from "./ui.js";
 export async function tasks_data() {
-
+const loading=document.querySelector('#loading_section')
     try {
-
-        const data = await axios.get("https://flowboard-api-virid.vercel.app/cards/",{
-                   
-            headers:{
-                'X-Workspace': 'public'
-
-            }
-
-
-    });
+        loading.classList.toggle('hidden')
+        const data = await axios.get("https://flowboard-api-virid.vercel.app/cards/");
 
         return card_creation(await data.data)
 
@@ -22,8 +14,12 @@ export async function tasks_data() {
         if (error.title == "undefined") {
             document.querySelector('#errorsec div').textContent = "not found"
         } else { document.querySelector('#errorsec div').prepend(error.title) }
+        
+    } finally{
+        loading.classList.toggle('hidden')
+    }
+        
 
-    };
 
 }
 
@@ -33,6 +29,7 @@ export async function data_filtering_api(filter) {
         const [filtered_data] = await Promise.all([
             axios.get("https://flowboard-api-virid.vercel.app/cards?" + filter),
         ])
+        console.log(filtered_data.data)
         return card_creation(filtered_data.data)
 
 

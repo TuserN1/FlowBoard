@@ -145,21 +145,12 @@ export function card_creation(card) {
 
 }
 
-// export function search_cards(data){
-//     const search_holder=document.querySelector('#search_display')
-//     search_holder.textContent=""
-//     card_creation(search_holder,data)
-            
-    
-
-// }
 
 
 
 
-let todo_data = []
-let inpro_data = []
-let done_data = []
+
+
 
 
 
@@ -190,28 +181,35 @@ out_card_btn.addEventListener('click', () => {
 
 
 })
-
-
-
 const priority_filter = document.querySelector('#priority_filter')
 const assignee_filter = document.querySelector('#assignee_filter')
-export function fillter_cards() {
+let search_filter = "";
 
+ const user_search = document.querySelector('#searchbar')
+user_search.addEventListener('input', (event) => {
+      
+       
+    
+    fillter_cards(event)
+    
+})
+
+export function fillter_cards(event) {
+console.log(event)
     const priority = priority_filter.value
     const assignee = assignee_filter.value
-    
-console.log("i am in");
+    const search = user_search.value
+    const filter=new URLSearchParams()
 
-    let filter = ""
-    if (priority !== "" && !assignee) {
-        filter += "priority=" + priority
-    }
-    if (assignee !== "" && !priority) {
-        filter += "assignee=" + assignee
-    }else{
-        filter += "assignee=" + assignee +"&priority=" +priority
-    }
+
     
+    if (priority !== ""   ) {filter.append("priority",priority)}
+
+    if (assignee !== "") {filter.append("assignee",assignee)}
+        
+    if(search!== "" ){filter.append("title_like", search)}
+console.log(filter.toString());
+
 data_collecter.data_filtering_api(filter)
    
         
@@ -219,7 +217,7 @@ data_collecter.data_filtering_api(filter)
 
 
 export async function modif_from_wizard(e,task){
-    const task_modif={};
+    
     console.log(task);
 
     document.querySelector('#wizard').classList.toggle('hidden')
@@ -235,24 +233,14 @@ export async function modif_from_wizard(e,task){
     
     
     
-    // data_collecter.data_modifiying_api(e,task)
+  
 
     
     
 
 }
-// const user_search = document.querySelector('#searchbar')
-// user_search.addEventListener('input', (event) => {
-    //     const search_input=event.target.value
-    
-    //     search(search_input)
-    
-// })
-// function search(input ) {
-//     if (input.trim() === "") {
-//         section.classList.add("hidden")
-//         return
-//     }
+
+
 
 //     const url = "https://flowboard-api-virid.vercel.app/cards?title_like=" + encodeURIComponent(input)
 //     fetch(url)

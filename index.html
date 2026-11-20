@@ -19,15 +19,16 @@
         <div class="flex justify-between items-center py-6 px-8">
             <span 
                 class="text-2xl font-black tracking-wider uppercase bg-gradient-to-r from-indigo-400 to-violet-500 bg-clip-text text-transparent">FlowBoard</span>
-            <button id="addbtn" class="bg-purple-400 hover:bg-purple-500 py-2 px-3 rounded-sm text-purple-100 ">+ new
+          <div id="butoncreat_reset_holder" class="flex flex-col gap-1 md:flex-row lg:flex-row justify-between ">  <button id="addbtn" class="bg-purple-400 hover:bg-purple-500 py-2 px-3 rounded-sm text-purple-100 ">+ new
                 task</button>
                 <button id="reset" class="bg-purple-400 hover:bg-purple-500 py-2 px-3 rounded-sm text-purple-100 ">reset</button>
-        </div>
+</div>
+            </div>
 
 
     </header>
     <main>
-        <section class="flex justify-between items-center">
+        <section class="flex flex-col justify-between md:flex-row lg:flex-row items-center">
 
             <label
                 class="flex items-center gap-3 max-w-md mx-auto px-4 py-2.5 bg-gray-50 border border-gray-300 rounded-lg cursor-text focus-within:bg-white focus-within:ring-2 focus-within:ring-blue-500 focus-within:border-blue-500 transition">
@@ -80,7 +81,7 @@
             </div>
         </section>
         <section
-            class="max-h-max min-h-screen w-full  grid grid-cols-[auto_auto_auto]  bg-white pt-6 flex-row shadow-md outline outline-black/5 dark:bg-gray-800 p-5 <div grid-cols-[repeat(auto-fit,minmax(max(250px,calc((100%-3rem)/3)),1fr))] justify-stretch  gap-6 ">
+            class="max-h-max min-h-screen w-full  grid grid-cols-1  md:grid-cols-2  lg:grid-cols-3 bg-white pt-6 shadow-md outline outline-black/5 dark:bg-gray-800 p-5 justify-stretch  gap-6 ">
             <div id="todo" class="min-w-[200px]  h-max bg-gray-700 rounded-sm p-5">
                 <div id="col1"><span>TO DO</span><span id="todototal"></span></div>
 

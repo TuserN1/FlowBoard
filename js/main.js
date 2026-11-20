@@ -8,6 +8,7 @@ await data_collecter.tasks_data()
 
 priority_filter.addEventListener('change', painter.fillter_cards)
 assignee_filter.addEventListener('change', painter.fillter_cards)
+
 const card_modif_btns = document.querySelectorAll('.cardbody .modif')
 
 card_modif_btns.forEach((element) => {
@@ -23,7 +24,7 @@ card_modif_btns.forEach((element) => {
 
 
 
-        let count=0
+        
         const add_modif_form = document.querySelector('#add_modif_form')
         add_modif_form.addEventListener('submit',async (e) => {
             e.preventDefault()
@@ -47,7 +48,7 @@ export async function modifying_add_form_data(e) {
         e.target.reset()
 
 
-        //const  data_collecter.data_modifiying_api(painter.modif_from_wizard(e))
+        
 
     } else {
 
