@@ -46,10 +46,39 @@ add_modif_form.addEventListener('submit', (e) => {
 
 
 // delet is working hmdollah
-export function delete_data(element){
+export async function delete_data(element){
+     const result = await Swal.fire({
+        title: 'Delete this card?',
+        text: "You won't be able to undo this.",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#c2410c',
+        cancelButtonColor: '#4b5563',
+        confirmButtonText: 'Yes, delete it',
+        cancelButtonText: 'Cancel'
+    })
 
-      const id = element.target.dataset.id
+      if(result.isConfirmed){
+        const id = element.target.dataset.id
             data_collecter.data_delete_api(id)
+            Swal.fire({
+            title: 'Deleted!',
+            icon: 'success',
+            timer: 1400,
+            showConfirmButton: false
+        })
+        }
+}
+
+
+
+
+export function position_changer(e){
+    
+const id=e.target.dataset.id;
+const status={status:e.target.dataset.status}
+data_collecter.data_position_change_api(id,status)
+
 }
 
 

@@ -93,11 +93,11 @@ export function card_creation(card) {
             cardbody.append(card_lable ,card_title ,card_discription,position_right,position_left)
             
         }else if(cardinfo.status=="done"){
-             position_right.dataset.id=cardinfo.id
-        position_right.dataset.status='in-progress'
+             position_left.dataset.id=cardinfo.id
+        position_left.dataset.status='in-progress'
             
             done_holder.append(cardbody)
-            cardbody.append(card_lable ,card_title ,card_discription,position_right)
+            cardbody.append(card_lable ,card_title ,card_discription,position_left)
         }
 
         card_discription.append(delete_modif_holder)
@@ -106,6 +106,21 @@ export function card_creation(card) {
         card_delete_btn.addEventListener('click',(event)=>{
             main.delete_data(event)
         })
+
+
+        const position_btns=document.querySelectorAll('.arrow')
+        position_btns.forEach(element => {
+            element.addEventListener('click',(e)=>{
+        
+        main.position_changer(e)
+        
+            })
+            
+        });
+
+
+
+        
 
 
 
