@@ -24,28 +24,60 @@ card_modif_btns.forEach( (element) => {
 
 
 
-const add_modif_form = document.querySelector('#add_modif_form')
-add_modif_form.addEventListener('submit', (e) => {
-    e.preventDefault()
-    if (e.submitter.value == "modif") {
-        console.log(e.submitter.dataset.id);
-         const formData = new FormData(e.target)
-        const fields = Object.fromEntries(formData)
-        
-         
-         
 
+export async function modifying_add_form_data(e){
+     if (e.submitter.value == "modif") {
+        const id=e.submitter.dataset.id;
+         const formData = new FormData(e.target)
+        const task = Object.fromEntries(formData)
+        
+       
+         
+         
+    await data_collecter.data_modifiying_api(id, task)
 
 
         //const  data_collecter.data_modifiying_api(painter.modif_from_wizard(e))
 
     } else {
 
+
+        
+            event.preventDefault();
+            const card_info = {
+        
+                title: null,
+                description: null,
+                status: "todo",
+                priority: null,
+                assignee: null,
+                dueDate: null,
+                tags: null,
+                createdAt: "2026-11-09T11:09:20.433Z",
+                updatedAt: "2026-11-09T11:09:20.433Z"
+            }
+        
+        
+        
+            const title = document.querySelector('#title_add').value;
+            const description = document.querySelector('#description_add').value;
+            const priority = document.querySelector('#priority_add').value;
+            const assignee = document.querySelector('#assignee_add').value;
+        
+        
+        
+            card_info.title = title
+            card_info.description = description
+            card_info.priority = priority
+            card_info.assignee = assignee
+            todo_data.push(card_info)
+            console.log(todo_data);
+             form.classList.toggle("hidden")
+            let place_todo = document.querySelector('#todo_holder')
+            card_creation(place_todo, todo_data)
+
     }
-
-
-
-})
+}
 
 
 

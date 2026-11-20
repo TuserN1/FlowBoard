@@ -1,5 +1,4 @@
 
-import axios from "axios";
 import  * as data_collecter from "./api.js"
 import * as main from "./main.js"
 export function card_creation(card) {
@@ -39,7 +38,7 @@ export function card_creation(card) {
         card_title.textContent=cardinfo.title
         card_discription.textContent=cardinfo.description
         card_title.classList.add("mx-4")
-        card_discription.classList.add('m-3','flex','items-center')
+        card_discription.classList.add('m-3','flex','items-center','justify-between')
 
 
 
@@ -118,6 +117,16 @@ export function card_creation(card) {
             
         });
 
+                
+        const add_modif_form = document.querySelector('#add_modif_form')
+        add_modif_form.addEventListener('submit',async (e) => {
+            e.preventDefault()
+        main.modifying_add_form_data(e)
+
+
+
+        })
+
 
 
         
@@ -175,52 +184,22 @@ document.querySelector('#refreshbtn').addEventListener('click', refresh_error )
 
 add_card_btn.addEventListener('click', () => {
     const form = document.querySelector('#wizard')
+    const form_add_btn=document.querySelector('[value="add"]')
+    const form_modif_btn=document.querySelector('[value="modif"]')
+    form_add_btn.classList.remove('hidden') 
+    form_modif_btn.classList.add('hidden')  
     form.classList.toggle("hidden")
+
 
 })
 out_card_btn.addEventListener('click', () => {
-    const form = document.querySelector('#wizard')
-    form.classList.toggle("hidden")
+    const wizard = document.querySelector('#wizard')
+    wizard.classList.toggle("hidden")
+
 
 })
 
-const task_form = document.querySelector('#add_modif_form')
-task_form.addEventListener("submit", (event) => {
 
-    event.preventDefault();
-    const card_info = {
-
-        title: null,
-        description: null,
-        status: "todo",
-        priority: null,
-        assignee: null,
-        dueDate: null,
-        tags: null,
-        createdAt: "2026-11-09T11:09:20.433Z",
-        updatedAt: "2026-11-09T11:09:20.433Z"
-    }
-
-
-
-    const title = document.querySelector('#title_add').value;
-    const description = document.querySelector('#description_add').value;
-    const priority = document.querySelector('#priority_add').value;
-    const assignee = document.querySelector('#assignee_add').value;
-
-
-
-    card_info.title = title
-    card_info.description = description
-    card_info.priority = priority
-    card_info.assignee = assignee
-    todo_data.push(card_info)
-    console.log(todo_data);
-     form.classList.toggle("hidden")
-    let place_todo = document.querySelector('#todo_holder')
-    card_creation(place_todo, todo_data)
-       
-})
 
 const priority_filter = document.querySelector('#priority_filter')
 const assignee_filter = document.querySelector('#assignee_filter')

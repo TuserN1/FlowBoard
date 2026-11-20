@@ -61,7 +61,7 @@ console.log(data.data);
 export async function data_modifiying_api(id, task) {
     try {
 
-        await axios.put("https://flowboard-api-virid.vercel.app/cards/" + id + "?password=1234", task)
+        await axios.patch("https://flowboard-api-virid.vercel.app/cards/" + id + "?password=1234", task)
 
         tasks_data()
     } catch (error) {
