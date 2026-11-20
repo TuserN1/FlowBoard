@@ -42,10 +42,26 @@ export async function data_filtering_api(filter) {
     }
 }
 
-export async function data_modifiying_api(task, id) {
+export async function get_one_task(id) {
+
     try {
 
-        await axios.patch("https://flowboard-api-virid.vercel.app/cards/" + id + "?password=1234", task)
+        const data = await axios.get("https://flowboard-api-virid.vercel.app/cards/"+id);
+console.log(data.data);
+
+        return data.data
+
+    } catch (error) {
+        console.error("Error. fetching cards:", error);
+        document.querySelector('#errorsec').classList.toggle('hidden')
+
+    };
+}
+
+export async function data_modifiying_api(id, task) {
+    try {
+
+        await axios.put("https://flowboard-api-virid.vercel.app/cards/" + id + "?password=1234", task)
 
         tasks_data()
     } catch (error) {
@@ -69,21 +85,6 @@ export async function data_adder_api(task) {
 
 
 
-}
-
-export async function get_one_task(id) {
-
-    try {
-
-        const data = await axios.get("https://flowboard-api-virid.vercel.app/cards/"+id);
-
-        return card_creation(data.data)
-
-    } catch (error) {
-        console.error("Error. fetching cards:", error);
-        document.querySelector('#errorsec').classList.toggle('hidden')
-
-    };
 }
 
 

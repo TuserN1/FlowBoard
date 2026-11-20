@@ -247,21 +247,24 @@ data_collecter.data_filtering_api(filter)
 }
 
 
-export function modif_from_wizard(e){
+export async function modif_from_wizard(e,task){
     const task_modif={};
-    console.log(e);
+    console.log(task);
 
-    
     document.querySelector('#wizard').classList.toggle('hidden')
-    document.querySelector("#title_add").value=e
+    document.querySelector("#title_add").value=task.title
+    document.querySelector("#description_add").value=task.description
+    document.querySelector("#priority_add").value=task.priority
+    document.querySelector("#assignee_add").value=task.assignee
     document.querySelector('[value="add"]').classList.add('hidden')
     const form_modif_btn=document.querySelector('[value="modif"]')
     form_modif_btn.classList.remove('hidden')
     form_modif_btn.dataset.id=e
     
-
     
-
+    
+    
+    // data_collecter.data_modifiying_api(e,task)
 
     
     

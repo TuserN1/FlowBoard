@@ -10,11 +10,13 @@ priority_filter.addEventListener('change', painter.fillter_cards)
 assignee_filter.addEventListener('change', painter.fillter_cards)
 const card_modif_btns = document.querySelectorAll('.cardbody .modif')
 
-card_modif_btns.forEach((element) => {
+card_modif_btns.forEach( (element) => {
 
-    element.addEventListener('click', (e) => {
+    element.addEventListener('click',async (e) => {
+        const id =e.target.dataset.id
+        const task= await data_collecter.get_one_task(id)
 
-        painter.modif_from_wizard(e.target.dataset.id)
+        painter.modif_from_wizard(id,task)
     })
 })
 
@@ -25,10 +27,12 @@ card_modif_btns.forEach((element) => {
 const add_modif_form = document.querySelector('#add_modif_form')
 add_modif_form.addEventListener('submit', (e) => {
     e.preventDefault()
-    if (e.submitter.value == modif) {
-        console.log(e.submitter.value);
+    if (e.submitter.value == "modif") {
+        console.log(e.submitter.dataset.id);
          const formData = new FormData(e.target)
-         console.log(formData);
+        const fields = Object.fromEntries(formData)
+        
+         
          
 
 

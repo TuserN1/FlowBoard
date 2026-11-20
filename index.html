@@ -117,20 +117,20 @@
                 <form id="add_modif_form" action="" class="h-full flex flex-col gap-4 bg-white p-6">
                     <label class="flex flex-col gap-1 text-sm text-gray-700">
                         Title
-                        <input type="text" id="title_add" placeholder="Task title" required
+                        <input type="text" id="title_add" name="title" placeholder="Task title" required
                             class="w-full rounded border border-gray-300 px-3 py-2">
                     </label>
 
                     <label class="flex flex-col gap-1 text-sm text-gray-700">
                         Description
-                        <textarea id="description_add" rows="4" placeholder="Describe the task..."
+                        <textarea id="description_add" name="description" rows="4" placeholder="Describe the task..."
                             class="w-full rounded border border-gray-300 px-3 py-2"></textarea>
                     </label>
 
                     <div class="grid grid-cols-2 gap-4">
                         <label class="flex flex-col gap-1 text-sm text-gray-700">
                             Priority
-                            <select id="priority_add" class="w-full rounded border border-gray-300 px-3 py-2">
+                            <select id="priority_add" name="priority" class="w-full rounded border border-gray-300 px-3 py-2">
                                 <option value="high">High</option>
                                 <option value="medium" selected>Medium</option>
                                 <option value="low">Low</option>
@@ -139,7 +139,7 @@
 
                         <label class="flex flex-col gap-1 text-sm text-gray-700">
                             Assignee
-                            <select id="assignee_add" class="w-full rounded border border-gray-300 px-3 py-2">
+                            <select id="assignee_add" name="assignee" class="w-full rounded border border-gray-300 px-3 py-2">
                                 <option value="Thomas Leroy">Thomas Leroy</option>
                                 <option value="Inès Moreau">Inès Moreau</option>
                                 <option value="Lucas Martin">Lucas Martin</option>
