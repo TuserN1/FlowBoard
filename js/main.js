@@ -27,6 +27,9 @@ add_modif_form.addEventListener('submit', (e) => {
     e.preventDefault()
     if (e.submitter.value == modif) {
         console.log(e.submitter.value);
+         const formData = new FormData(e.target)
+         console.log(formData);
+         
 
 
 
@@ -42,7 +45,7 @@ add_modif_form.addEventListener('submit', (e) => {
 
 
 
-
+// delet is working hmdollah
 export function delete_data(element){
 
       const id = element.target.dataset.id

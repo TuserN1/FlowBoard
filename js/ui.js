@@ -5,8 +5,8 @@ import * as main from "./main.js"
 export function card_creation(card) {
 
 
- console.log(card);
  
+    
         todo_holder.textContent=""
         inprogress_holder.textContent=""
         done_holder.textContent=""
@@ -34,19 +34,38 @@ export function card_creation(card) {
         
         const card_title=document.createElement('h4')
         const card_discription=document.createElement('div')
+
+
         card_title.textContent=cardinfo.title
         card_discription.textContent=cardinfo.description
         card_title.classList.add("mx-4")
-        card_discription.classList.add('m-3','flex')
+        card_discription.classList.add('m-3','flex','items-center')
+
+
+
+
         //modif button add
         const card_modif_btn=document.createElement('button')
         const card_delete_btn=document.createElement('button')
+        const delete_modif_holder=document.createElement('div')
+        const position_left=document.createElement('button')
+        const position_right=document.createElement('button')
+
+
+        delete_modif_holder.classList.add('flex','flex-col')
+        position_right.classList.add('arrow','m-2', 'bg-gray-700', 'hover:bg-gray-900', 'py-2', 'px-3', 'rounded-sm', 'text-purple-100')
+        position_left.classList.add('arrow','m-2', 'bg-gray-700', 'hover:bg-gray-900', 'py-2', 'px-3', 'rounded-sm', 'text-purple-100')
+        
+        position_left.textContent="<——"
+        position_right.textContent="——>"
         card_modif_btn.textContent="modifier"
         card_delete_btn.textContent="delete"
+        card_modif_btn.classList.add('modif','m-2', 'bg-gray-700', 'hover:bg-gray-900', 'py-2', 'px-3', 'rounded-sm', 'text-purple-100' )
+        card_delete_btn.classList.add('delete','m-2', 'bg-orange-800', 'hover:bg-orange-900', 'py-2', 'px-3', 'rounded-sm', 'text-purple-100' )
+        
+        
         card_modif_btn.dataset.id=cardinfo.id
         card_delete_btn.dataset.id=cardinfo.id
-        card_modif_btn.classList.add('modif','m-4', 'bg-gray-700', 'hover:bg-gray-900', 'py-2', 'px-3', 'rounded-sm', 'text-purple-100' )
-        card_delete_btn.classList.add('delete','m-4', 'bg-orange-800', 'hover:bg-orange-900', 'py-2', 'px-3', 'rounded-sm', 'text-purple-100' )
         
         
         
@@ -55,27 +74,41 @@ export function card_creation(card) {
         const done_holder=document.querySelector('#done_holder')
         
         if (cardinfo.status=="todo"){
+        position_right.dataset.id=cardinfo.id
+        position_right.dataset.status='in-progress'
+
             
             todo_holder.append(cardbody)
-            cardbody.append(card_lable ,card_title ,card_discription)
+            cardbody.append(card_lable ,card_title ,card_discription,position_right)
             
             
         }else if (cardinfo.status=="in-progress"){
+            position_right.dataset.id=cardinfo.id
+        position_right.dataset.status='done'
+        position_left.dataset.id=cardinfo.id
+        position_left.dataset.status='todo'
             
             
             inprogress_holder.append(cardbody)
-            cardbody.append(card_lable ,card_title ,card_discription)
+            cardbody.append(card_lable ,card_title ,card_discription,position_right,position_left)
             
         }else if(cardinfo.status=="done"){
+             position_right.dataset.id=cardinfo.id
+        position_right.dataset.status='in-progress'
             
             done_holder.append(cardbody)
-            cardbody.append(card_lable ,card_title ,card_discription)
+            cardbody.append(card_lable ,card_title ,card_discription,position_right)
         }
-        card_discription.append(card_modif_btn,card_delete_btn)
+
+        card_discription.append(delete_modif_holder)
+        delete_modif_holder.append(card_modif_btn,card_delete_btn)
         
         card_delete_btn.addEventListener('click',(event)=>{
             main.delete_data(event)
         })
+
+
+
 
 
         
@@ -144,7 +177,7 @@ task_form.addEventListener("submit", (event) => {
 
         title: null,
         description: null,
-        status: null,
+        status: "todo",
         priority: null,
         assignee: null,
         dueDate: null,
@@ -160,6 +193,8 @@ task_form.addEventListener("submit", (event) => {
     const priority = document.querySelector('#priority_add').value;
     const assignee = document.querySelector('#assignee_add').value;
 
+
+
     card_info.title = title
     card_info.description = description
     card_info.priority = priority
@@ -169,19 +204,16 @@ task_form.addEventListener("submit", (event) => {
      form.classList.toggle("hidden")
     let place_todo = document.querySelector('#todo_holder')
     card_creation(place_todo, todo_data)
-    
-    
-    
-    
-    
-    
-    
+       
 })
+
 const priority_filter = document.querySelector('#priority_filter')
 const assignee_filter = document.querySelector('#assignee_filter')
 export function fillter_cards() {
+
     const priority = priority_filter.value
     const assignee = assignee_filter.value
+    
 console.log("i am in");
 
     let filter = ""
@@ -196,10 +228,8 @@ console.log("i am in");
     
 data_collecter.data_filtering_api(filter)
    
-
         
 }
-
 
 
 export function modif_from_wizard(e){

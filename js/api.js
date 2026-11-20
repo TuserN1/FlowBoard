@@ -4,13 +4,24 @@ export async function tasks_data() {
 
     try {
 
-        const data = await axios.get("https://flowboard-api-virid.vercel.app/cards/");
+        const data = await axios.get("https://flowboard-api-virid.vercel.app/cards/",{
+                   
+            headers:{
+                'X-Workspace': 'public'
+
+            }
+
+
+    });
 
         return card_creation(await data.data)
 
     } catch (error) {
         console.error("Error. fetching cards:", error);
         document.querySelector('#errorsec').classList.toggle('hidden')
+        if (error.title == "undefined") {
+            document.querySelector('#errorsec div').textContent = "not found"
+        } else { document.querySelector('#errorsec div').prepend(error.title) }
 
     };
 
@@ -31,11 +42,11 @@ export async function data_filtering_api(filter) {
     }
 }
 
-export async function data_modifiying_api(task ,id) {
+export async function data_modifiying_api(task, id) {
     try {
 
-      await axios.put("https://flowboard-api-virid.vercel.app/cards/"+ id +"?password=1234",  task)
-      
+        await axios.patch("https://flowboard-api-virid.vercel.app/cards/" + id + "?password=1234", task)
+
         tasks_data()
     } catch (error) {
         console.error("Error filtering cards:", error.name)
@@ -45,11 +56,11 @@ export async function data_modifiying_api(task ,id) {
 
 
 
-export async function data_adder_api(task){
+export async function data_adder_api(task) {
     try {
 
-        await axios.post("https://flowboard-api-virid.vercel.app/cards/?password=1234",  task)
-      
+        await axios.post("https://flowboard-api-virid.vercel.app/cards/?password=1234", task)
+
         tasks_data()
     } catch (error) {
         console.error("Error filtering cards:", error.name)
@@ -59,6 +70,7 @@ export async function data_adder_api(task){
 
 
 }
+
 export async function get_one_task() {
 
     try {
@@ -75,18 +87,17 @@ export async function get_one_task() {
 }
 
 
-export async function data_delete_api(id){
+export async function data_delete_api(id) {
+
     try {
-       await axios.delete('https://flowboard-api-virid.vercel.app/cards/'+id+'?password=1234')
+        await axios.delete('https://flowboard-api-virid.vercel.app/cards/' + id + '?password=1234')
         await tasks_data()
-        
+
     } catch (error) {
-         console.error("Error. fetching cards:", error);
+        console.error("Error. fetching cards:", error);
         document.querySelector('#errorsec').classList.toggle('hidden')
-        
+
     }
-
-
 
 }
 
@@ -116,23 +127,24 @@ export async function data_delete_api(id){
 
 
 
-document.querySelector('#reset').addEventListener('click',()=>{
+document.querySelector('#reset').addEventListener('click', () => {
 
 
     fetch('https://flowboard-api-virid.vercel.app/reset?password=1234', {
-  method: 'POST',
-  headers: {
-    'X-Workspace': 'public'
-  }
+        method: 'POST',
+        headers: {
+            'X-Workspace': 'public'
+        }
+    })
+    document.querySelector('#errorsec').classList.add('hidden')
+
+    tasks_data()
 })
-tasks_data()
-})
-
-
-
-    
 
 
 
 
-    
+
+
+
+
