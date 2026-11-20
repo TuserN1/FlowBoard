@@ -60,7 +60,7 @@ export async function data_modifiying_api(id, task) {
 
         await axios.patch("https://flowboard-api-virid.vercel.app/cards/" + id + "?password=1234", task)
 
-        tasks_data()
+        return tasks_data()
     } catch (error) {
         console.error("Error filtering cards:", error.name)
         console.error(error.message)
@@ -74,7 +74,7 @@ export async function data_adder_api(task) {
 
         await axios.post("https://flowboard-api-virid.vercel.app/cards?password=1234", task)
 
-       await tasks_data()
+       return  await tasks_data()
     } catch (error) {
         console.error("Error filtering cards:", error.name)
         console.error("Server says:", JSON.stringify(error.response?.data?.details, null, 2))
@@ -90,7 +90,7 @@ export async function data_delete_api(id) {
 
     try {
         await axios.delete('https://flowboard-api-virid.vercel.app/cards/' + id + '?password=1234')
-        await tasks_data()
+        return await tasks_data()
 
     } catch (error) {
         console.error("Error. fetching cards:", error);
@@ -104,7 +104,7 @@ export async function data_position_change_api(id,status) {
 console.log("id:", id, "status:", status)
     try {
         await axios.patch('https://flowboard-api-virid.vercel.app/cards/' + id + '?password=1234',status     )
-        await tasks_data()
+        return await tasks_data()
 
     } catch (error) {
         console.error("Error. fetching cards:", error);
