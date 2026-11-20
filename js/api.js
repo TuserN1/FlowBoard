@@ -75,12 +75,13 @@ export async function data_modifiying_api(id, task) {
 export async function data_adder_api(task) {
     try {
 
-        await axios.post("https://flowboard-api-virid.vercel.app/cards/?password=1234", task)
+        await axios.post("https://flowboard-api-virid.vercel.app/cards?password=1234", task)
 
-        tasks_data()
+       await tasks_data()
     } catch (error) {
         console.error("Error filtering cards:", error.name)
-        console.error(error.message)
+        console.error("Server says:", JSON.stringify(error.response?.data?.details, null, 2))
+        document.querySelector('#errorsec').classList.remove('hidden')
     }
 
 

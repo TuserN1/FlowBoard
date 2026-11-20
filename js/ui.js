@@ -117,15 +117,7 @@ export function card_creation(card) {
             
         });
 
-                
-        const add_modif_form = document.querySelector('#add_modif_form')
-        add_modif_form.addEventListener('submit',async (e) => {
-            e.preventDefault()
-        main.modifying_add_form_data(e)
-
-
-
-        })
+        
 
 
 
