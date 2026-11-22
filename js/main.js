@@ -117,5 +117,51 @@ export function position_changer(e) {
 }
 
 
+const ai_btn = document.querySelector('#ai_btn')
+const ai_wizard = document.querySelector('#ai_task')
+const add_wizard = document.querySelector('#task_add')
+ai_btn.addEventListener('click',()=>{
+    ai_btn.classList.toggle('hidden')
+    ai_wizard.classList.toggle('hidden')
+    add_wizard.classList.toggle('hidden')
+
+
+
+
+
+})
+
+
+const add_ai_form = document.querySelector('#add_ai_form')
+        add_ai_form.addEventListener('submit',async (e) => {
+            e.preventDefault()
+        ai_form_data(e)
+            
+
+
+        })
+
+
+
+
+        function ai_form_data(e){
+const ai_data= Object.fromEntries(new FormData(e.target))
+
+
+const desctiption =ai_data.description
+const count =ai_data.ai_counter
+
+
+
+data_collecter.task_generator(desctiption,count)
+
+
+        }
+
+
+
+
+
+
 
 

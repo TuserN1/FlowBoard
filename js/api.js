@@ -1,7 +1,7 @@
 import axios from "axios";
 import { card_creation } from "./ui.js";
 export async function tasks_data() {
-const loading=document.querySelector('#loading_section')
+    const loading = document.querySelector('#loading_section')
     try {
         loading.classList.toggle('hidden')
         const data = await axios.get("https://flowboard-api-virid.vercel.app/cards/");
@@ -14,11 +14,11 @@ const loading=document.querySelector('#loading_section')
         if (error.title == "undefined") {
             document.querySelector('#errorsec div').textContent = "not found"
         } else { document.querySelector('#errorsec div').prepend(error.title) }
-        
-    } finally{
+
+    } finally {
         loading.classList.toggle('hidden')
     }
-        
+
 
 
 }
@@ -43,8 +43,8 @@ export async function get_one_task(id) {
 
     try {
 
-        const data = await axios.get("https://flowboard-api-virid.vercel.app/cards/"+id);
-console.log(data.data);
+        const data = await axios.get("https://flowboard-api-virid.vercel.app/cards/" + id);
+        console.log(data.data);
 
         return data.data
 
@@ -74,7 +74,7 @@ export async function data_adder_api(task) {
 
         await axios.post("https://flowboard-api-virid.vercel.app/cards?password=1234", task)
 
-       return  await tasks_data()
+        return await tasks_data()
     } catch (error) {
         console.error("Error filtering cards:", error.name)
         console.error("Server says:", JSON.stringify(error.response?.data?.details, null, 2))
@@ -100,10 +100,10 @@ export async function data_delete_api(id) {
 
 }
 
-export async function data_position_change_api(id,status) {
-console.log("id:", id, "status:", status)
+export async function data_position_change_api(id, status) {
+    console.log("id:", id, "status:", status)
     try {
-        await axios.patch('https://flowboard-api-virid.vercel.app/cards/' + id + '?password=1234',status     )
+        await axios.patch('https://flowboard-api-virid.vercel.app/cards/' + id + '?password=1234', status)
         return await tasks_data()
 
     } catch (error) {
@@ -116,17 +116,42 @@ console.log("id:", id, "status:", status)
 
 
 
+// ai task generator
 
 
+export async function task_generator(discription, count) {
+    try {
+
+        const response_ai =await axios.post('https://flowboard-api-virid.vercel.app/ai/cards?password=1234',
+
+            {
+                description: discription,
+                apiKey: 'AQ.Ab8RN6LyZ5r_RmmGwoWn2nwqiORFXY-mfQ2vvca5FoU8MAhq_Q',
+                count: Number(count)
+
+            },
+            {
+                headers: {
+                    'X-Workspace': 'public',
+                    
+                }
+            }
+        )
+
+        
+         tasks_data()
+        
+        
+
+    } catch (error) {
 
 
+        console.log(error);
 
 
+    }
 
-
-
-
-
+}
 
 
 

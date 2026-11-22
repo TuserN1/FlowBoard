@@ -152,10 +152,8 @@ export function card_creation(card) {
 
 
 
-
-
 const add_card_btn = document.querySelector('#addbtn')
-const out_card_btn = document.querySelector('#out')
+const out_card_btn = document.querySelector('.out')
 
 document.querySelector('#refreshbtn').addEventListener('click', refresh_error )
     function refresh_error(){
