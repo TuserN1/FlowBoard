@@ -122,7 +122,7 @@ export async function data_position_change_api(id, status) {
 export async function task_generator(discription, count) {
     try {
 
-        const response_ai =await axios.post('https://flowboard-api-virid.vercel.app/ai/cards?password=1234',
+        const response_ai = await axios.post('https://flowboard-api-virid.vercel.app/ai/cards?password=1234',
 
             {
                 description: discription,
@@ -133,25 +133,45 @@ export async function task_generator(discription, count) {
             {
                 headers: {
                     'X-Workspace': 'public',
-                    
+
                 }
             }
         )
+        console.log(Number(count));
 
-        
-         tasks_data()
-        
-        
+
+
+        await tasks_data()
+
+        Swal.fire({
+            title: "done",
+            text: "your tasks are ready",
+            icon: "success"
+        });
+
+
 
     } catch (error) {
 
 
-        console.log(error);
+        if (error.status = 400) {
+            Swal.fire({
+                title: "Oops!",
+                text: "input is not correct!",
+                icon: "error"
+            });
+        } else {
+            Swal.fire({
+                title: "Oops!",
+                text: "something went wrong!",
+                icon: "error"
+            });
+        }
+
 
 
     }
 
-}
 
 
 
@@ -167,29 +187,17 @@ export async function task_generator(discription, count) {
 
 
 
+    document.querySelector('#reset').addEventListener('click', () => {
 
-document.querySelector('#reset').addEventListener('click', () => {
 
+        fetch('https://flowboard-api-virid.vercel.app/reset?password=1234', {
+            method: 'POST',
+            headers: {
+                'X-Workspace': 'public'
+            }
+        })
+        document.querySelector('#errorsec').classList.add('hidden')
 
-    fetch('https://flowboard-api-virid.vercel.app/reset?password=1234', {
-        method: 'POST',
-        headers: {
-            'X-Workspace': 'public'
-        }
+        tasks_data()
     })
-    document.querySelector('#errorsec').classList.add('hidden')
-
-    tasks_data()
-})
-
-
-
-
-
-
-
-
-
-
-
-
+}

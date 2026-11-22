@@ -24,15 +24,15 @@ card_modif_btns.forEach((element) => {
 
 
 
-        
-        const add_modif_form = document.querySelector('#add_modif_form')
-        add_modif_form.addEventListener('submit',async (e) => {
-            e.preventDefault()
-        await modifying_add_form_data(e)
+
+const add_modif_form = document.querySelector('#add_modif_form')
+add_modif_form.addEventListener('submit', async (e) => {
+    e.preventDefault()
+    await modifying_add_form_data(e)
 
 
 
-        })
+})
 
 export async function modifying_add_form_data(e) {
     if (e.submitter.value == "modif") {
@@ -48,7 +48,7 @@ export async function modifying_add_form_data(e) {
         e.target.reset()
 
 
-        
+
 
     } else {
 
@@ -56,17 +56,17 @@ export async function modifying_add_form_data(e) {
         const task = Object.fromEntries(formData)
         console.log(task);
 
-        
-        const   task_info = {
+
+        const task_info = {
             title: task.title,
             description: task.description,
-            priority:task.priority,
+            priority: task.priority,
             assignee: task.assignee,
             status: "todo",
             tags: []
         }
         console.log(task_info);
-        
+
         data_collecter.data_adder_api(task_info)
         document.querySelector('#wizard').classList.add('hidden')
         e.target.reset()
@@ -120,7 +120,7 @@ export function position_changer(e) {
 const ai_btn = document.querySelector('#ai_btn')
 const ai_wizard = document.querySelector('#ai_task')
 const add_wizard = document.querySelector('#task_add')
-ai_btn.addEventListener('click',()=>{
+ai_btn.addEventListener('click', () => {
     ai_btn.classList.toggle('hidden')
     ai_wizard.classList.toggle('hidden')
     add_wizard.classList.toggle('hidden')
@@ -133,30 +133,32 @@ ai_btn.addEventListener('click',()=>{
 
 
 const add_ai_form = document.querySelector('#add_ai_form')
-        add_ai_form.addEventListener('submit',async (e) => {
-            e.preventDefault()
-        ai_form_data(e)
-            
+add_ai_form.addEventListener('submit', async ( e) => {
+    e.preventDefault()
+    ai_form_data(e)
+    
+    add_ai_form.reset()
+    ai_btn.classList.toggle('hidden')
+    ai_wizard.classList.toggle('hidden')
+    add_wizard.classList.toggle('hidden')
+    document.querySelector('#wizard').classList.add('hidden')
+
+})
 
 
-        })
+function ai_form_data(e) {
+    const ai_data = Object.fromEntries(new FormData(e.target))
+
+
+    const desctiption = ai_data.description
+    const count = ai_data.ai_counter
 
 
 
-
-        function ai_form_data(e){
-const ai_data= Object.fromEntries(new FormData(e.target))
+    data_collecter.task_generator(desctiption, count)
 
 
-const desctiption =ai_data.description
-const count =ai_data.ai_counter
-
-
-
-data_collecter.task_generator(desctiption,count)
-
-
-        }
+}
 
 
 
